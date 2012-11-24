@@ -10,6 +10,9 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+# RVM config
+/.rvmrc
+
 # bundler state
 /.bundle
 /vendor/bundle/
