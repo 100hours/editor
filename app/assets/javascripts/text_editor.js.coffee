@@ -4,7 +4,7 @@ class Editor
   dirty: false
 
   constructor: ->
-    @throttledSave = $.throttle(50, @_save)
+    @throttledSave = $.throttle(500, @_save)
 
   update: ->
     @dirty = true

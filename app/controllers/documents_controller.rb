@@ -56,7 +56,7 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
-    Pusher['test_channel'].trigger('update', {
+    Pusher["#{@document.id}"].trigger('update', {
       body: @document.body
     })
     respond_with @document.update_attributes(params[:document])
