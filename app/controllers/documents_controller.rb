@@ -1,4 +1,7 @@
 class DocumentsController < ApplicationController
+
+  respond_to :json, only: [:update]
+
   # GET /documents
   # GET /documents.json
   def index
@@ -53,16 +56,10 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
-
-    respond_to do |format|
-      if @document.update_attributes(params[:document])
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
-    end
+    Pusher['test_channel'].trigger('update', {
+      body: @document.body
+    })
+    respond_with @document.update_attributes(params[:document])
   end
 
   # DELETE /documents/1

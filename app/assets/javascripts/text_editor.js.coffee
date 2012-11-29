@@ -4,13 +4,14 @@ class Editor
   dirty: false
 
   constructor: ->
-    @throttledSave = $.throttle(2000, @_save)
+    @throttledSave = $.throttle(50, @_save)
 
   update: ->
     @dirty = true
     @throttledSave() # TODO: Throttle this
 
   _save: ->
+    console.log '_save'
     form = $('form')
     $.ajax
       type: 'POST'
