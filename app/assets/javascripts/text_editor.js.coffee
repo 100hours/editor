@@ -1,15 +1,16 @@
 # TODO : Rewrite this using some proper design patterns
 
-App.editor =
+class Editor
   dirty: false
 
-  update: ->
-    console.log 'update'
-    @dirty = true
-    @save() # TODO: Throttle this
+  constructor: ->
+    @throttledSave = $.throttle(2000, @_save)
 
-  save: ->
-    console.log 'save'
+  update: ->
+    @dirty = true
+    @throttledSave() # TODO: Throttle this
+
+  _save: ->
     form = $('form')
     $.ajax
       type: 'POST'
@@ -19,8 +20,10 @@ App.editor =
       success: (response) =>
         @dirty = false
 
-$ ->
-  $('#redactor').redactor()
 
+$ ->
+  editor = new Editor
+
+  $('#redactor').redactor()
   $('form').keyup ->
-    App.editor.update()
+    editor.update()
