@@ -21,10 +21,13 @@ class Editor
       success: (response) =>
         @dirty = false
 
-
-$ ->
+App.register 'documents/edit', (data) ->
   editor = new Editor
 
   $('#redactor').redactor()
-  $('form').keyup ->
+  setInterval ->
     editor.update()
+  , 500
+
+  #  $('form').keyup ->
+  #  editor.update()

@@ -5,3 +5,7 @@
 = link_to 'Show', @document
 \|
 = link_to 'Back', documents_path
+
+- content_for :end_javascript do
+  :javascript
+    App.require('documents/edit', {})
