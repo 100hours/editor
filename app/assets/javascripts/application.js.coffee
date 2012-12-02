@@ -18,7 +18,7 @@
 #= require_tree .
 
 @App = {}
-window.App = {}
+#window.App = {}
 
 App.register = (label, callback) ->
   App.fragments = App.fragments || {}
