@@ -56,10 +56,12 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
-    Pusher["#{@document.id}"].trigger('update', {
-      body: @document.body
-    })
-    respond_with @document.update_attributes(params[:document])
+    if @document.update_attributes(params[:document])
+      Pusher["#{@document.id}"].trigger('update', {
+        body: @document.body
+      })
+    end
+    respond_with @document
   end
 
   # DELETE /documents/1
