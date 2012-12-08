@@ -57,7 +57,9 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
     if @document.update_attributes(params[:document])
-      Pusher["#{@document.id}"].trigger('update', {
+      Pusher["main_channel"].trigger('update', {
+        id: @document.id.to_s,
+        title: @document.title,
         body: @document.body
       })
     end
