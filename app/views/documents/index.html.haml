@@ -1,18 +1,14 @@
 %h1 Listing documents
 
-%table
+%table.table
   %tr
     %th Title
-    %th Body
-    %th
     %th
     %th
 
   - @documents.each do |document|
     %tr
-      %td= document.title
-      %td= document.body
-      %td= link_to 'Show', document
+      %td= link_to document.title, edit_document_path(document)
       %td= link_to 'Edit', edit_document_path(document)
       %td= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }
 

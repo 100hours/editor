@@ -1,5 +1,5 @@
 Editor::Application.routes.draw do
   resources :documents
 
-  root :to => "home#index"
+  root :to => "documents#index"
 end
