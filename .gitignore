@@ -10,6 +10,9 @@
 # http://github.com/RailsApps/rails-composer/issues
 #----------------------------------------------------------------------------
 
+# Environment
+.env
+
 # RVM config
 /.rvmrc
 
