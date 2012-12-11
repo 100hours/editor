@@ -60,7 +60,8 @@ class DocumentsController < ApplicationController
       Pusher["main_channel"].trigger('update', {
         id: @document.id.to_s,
         title: @document.title,
-        body: @document.body
+        body: @document.body,
+        updated_at: @document.updated_at
       })
     end
     respond_with @document
