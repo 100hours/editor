@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @documents = Document.select([:id, :title, :word_count, :updated_at, :requester])
 
     respond_to do |format|
       format.html # index.html.erb
