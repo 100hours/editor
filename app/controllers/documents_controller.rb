@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @documents = Document.select([:id, :title, :word_count, :updated_at, :requester])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,8 +27,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   # GET /documents/new.json
   def new
-    document = Document.create
-    redirect_to edit_document_path document
+    @document = Document.new
   end
 
   # GET /documents/1/edit
@@ -43,7 +42,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.html { redirect_to edit_document_path(@document), notice: 'Document was successfully created.' }
         format.json { render json: @document, status: :created, location: @document }
       else
         format.html { render action: "new" }

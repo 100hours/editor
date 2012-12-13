@@ -1,17 +1,23 @@
-%h1 Listing documents
 
-%table.table
-  %tr
-    %th Title
-    %th
-    %th
-
-  - @documents.each do |document|
+%table.table.table-hover
+  %thead
     %tr
-      %td= link_to document.title, edit_document_path(document)
-      %td= link_to 'Edit', edit_document_path(document)
-      %td= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Title
+      %th Words
+      %th Requester
+      %th Last Updated
+      %th
 
-%br
-
-= link_to 'New Document', new_document_path
+  %tbody
+    - @documents.each do |document|
+      %tr
+        %td
+          = link_to edit_document_path(document) do
+            %i.icon-pencil
+            = raw title_or_default(document.title)
+        %td= document.word_count
+        %td= document.requester
+        %td= time_tag document.updated_at, format: :short
+        %td
+          = link_to document, method: :delete, data: { confirm: 'Are you sure?' } do
+            %i.icon-trash
