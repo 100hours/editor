@@ -7,7 +7,6 @@ class Editor
     title: false
 
   constructor: ->
-    @throttledSave = $.throttle(500, @_save)
     @takeSnapshot()
 
   takeSnapshot: ->
@@ -26,7 +25,7 @@ class Editor
   update: ->
     if (@textChanged() and not @dirty)
       @dirty = true
-      @throttledSave() # TODO: Throttle this
+      @_save()
 
   _save: ->
     console.log '_save'
