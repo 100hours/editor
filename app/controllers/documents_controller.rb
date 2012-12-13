@@ -57,12 +57,7 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
     if @document.update_attributes(params[:document])
-      Pusher["main_channel"].trigger('update', {
-        id: @document.id.to_s,
-        title: @document.title,
-        body: @document.body,
-        updated_at: @document.updated_at
-      })
+      Pusher.trigger(pusher_channel, 'update', @document.to_pusher)
     end
     respond_with @document
   end
@@ -77,5 +72,11 @@ class DocumentsController < ApplicationController
       format.html { redirect_to documents_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def pusher_channel
+    "#{Rails.env}_main_channel"
   end
 end
