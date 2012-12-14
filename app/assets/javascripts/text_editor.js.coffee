@@ -22,14 +22,21 @@ class Editor
   textChanged: ->
     (@snapshot.body != @currentBody()) or (@snapshot.title != @currentTitle())
 
+  countWords: (text) ->
+    $('#redactor').getText().match(/\w+/g).length;
+
+  updateWordCount: ->
+    $('#document_word_count').val(@countWords(@snapshot.body))
+
   update: ->
     if (@textChanged() and not @dirty)
       @dirty = true
+      @takeSnapshot()
+      @updateWordCount()
       @_save()
 
   _save: ->
     console.log '_save'
-    @takeSnapshot()
     form = $('form')
     $.ajax
       type: 'POST'
