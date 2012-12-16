@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :body, :title, :requester
+  attr_accessible :body, :title, :requester, :word_count
 
   default_scope order("updated_at DESC")
 

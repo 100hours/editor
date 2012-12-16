@@ -6,26 +6,39 @@
         - @document.errors.full_messages.each do |msg|
           %li= msg
 
-  .control-group
-    = f.label :title, class: "control-label"
-    .controls
-      = f.text_field :title, placeholder: "Untitled"
-  .control-group
-    = f.label :requester, class: "control-label"
-    .controls
+  .row
+    .span6
+      .control-group
+        = f.label :title, class: "control-label"
+        .controls
+          = f.text_field :title, placeholder: "Untitled"
+          - unless @document.new_record?
+            #connection-status.label
+              Initialising...
+      .control-group
+        = f.label :requester, class: "control-label"
+        .controls
+          - if @document.new_record?
+            .input-prepend
+              %span.add-on
+                %i.icon-envelope
+              = f.text_field :requester, placeholder: "email address"
+          - else
+            %span.uneditable-input.input= @document.requester
+    .span6
+      - unless @document.new_record?
+        .control-group
+          = f.label :word_count, class: "control-label"
+          .controls
+            = f.number_field :word_count, value: @document.word_count, class: "uneditable-input input", readonly: "readonly"
+  .row
+    .span12
       - if @document.new_record?
-        .input-prepend
-          %span.add-on
-            %i.icon-envelope
-          = f.text_field :requester, placeholder: "email address"
+        .control-group
+          .controls
+            = f.submit class: "btn"
       - else
-        %span.uneditable-input.input= @document.requester
-  - if @document.new_record?
-    .control-group
-      .controls
-        = f.submit class: "btn"
-  - else
-    .control-group
-      = f.label :body, class: "control-label"
-      .controls
-        = f.text_area :body, id: 'redactor'
+        .control-group
+          = f.label :body, class: "control-label"
+          .controls
+            = f.text_area :body, id: 'redactor'
