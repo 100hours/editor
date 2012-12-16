@@ -12,6 +12,9 @@
         = f.label :title, class: "control-label"
         .controls
           = f.text_field :title, placeholder: "Untitled"
+          - unless @document.new_record?
+            #connection-status.label
+              Initialising...
       .control-group
         = f.label :requester, class: "control-label"
         .controls
@@ -23,8 +26,7 @@
           - else
             %span.uneditable-input.input= @document.requester
     .span6
-      - if @document.new_record?
-      - else
+      - unless @document.new_record?
         .control-group
           = f.label :word_count, class: "control-label"
           .controls
