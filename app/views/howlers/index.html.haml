@@ -1,0 +1,30 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th Id
+      %th Notes
+      %th Charges left
+      %th Created at
+      %th Last used at
+      %th Actions
+  %tbody
+    - @howlers.each do |howler|
+      %tr
+        %td
+          = link_to howler do
+            = howler.id
+        %td
+          = link_to howler do
+            = simple_format howler.notes
+        %td= howler.charges
+        %td= time_tag howler.created_at, format: :short
+        %td= howler.played? ? time_tag(howler.played_at, format: :short) : "-"
+        %td
+          = render partial: "actions", locals: { howler: howler }
+
+- content_for :navigation do
+  %li
+    = link_to new_howler_path do
+      %i.icon-file
+      New Howler
+
