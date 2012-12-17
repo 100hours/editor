@@ -21,3 +21,9 @@
         %td
           = link_to document, method: :delete, data: { confirm: 'Are you sure?' } do
             %i.icon-trash
+
+- content_for :navigation do
+  %li
+    = link_to new_document_path do
+      %i.icon-file
+      New Document
