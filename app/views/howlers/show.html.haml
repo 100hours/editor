@@ -1,0 +1,28 @@
+%h2 Howler ##{@howler.id}
+.actions
+  = render partial: "actions", locals: { howler: @howler }
+
+%p
+  This howler was created on
+  = time_tag @howler.created_at, format: :long
+  and still has
+  = @howler.charges
+  charges left.
+%p
+  - if @howler.played? 
+    It has been used for the last time on
+    = time_tag @howler.played_at, format: :long
+  - else
+    This howler never played yet.
+
+%h3 Secret URL
+%p
+  The url that will activate this Howler is...
+%pre
+  http://100hours.tv/howl/#{@howler.url}
+
+
+%blockquote
+  %p
+    = simple_format @howler.notes
+

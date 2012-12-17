@@ -1,0 +1,18 @@
+= form_for @howler, html: { class: "form-horizontal" } do |f|
+  - if @howler.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@howler.errors.count, "error")} prohibited this howler from being saved:"
+      %ul
+        - @howler.errors.full_messages.each do |msg|
+          %li= msg
+  .control-group
+    = f.label :charges, class: "control-label"
+    .controls
+      = f.number_field :charges, value: @howler.charges, class: "input"
+  .control-group
+    = f.label :notes, class: "control-label"
+    .controls
+      = f.text_area :notes, rows: 3
+  .control-group
+    .controls
+      = f.submit class: "btn"
