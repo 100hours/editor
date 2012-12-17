@@ -5,7 +5,7 @@ class Document < ActiveRecord::Base
 
   def to_pusher
     {
-      id:         self.id,
+      id:         self.id.to_s,
       title:      self.title,
       body:       self.body,
       updated_at: self.updated_at
