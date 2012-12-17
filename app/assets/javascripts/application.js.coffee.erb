@@ -26,3 +26,9 @@ App.register = (label, callback) ->
 
 App.require = (label, data) ->
   App.fragments[label].call(window,data)
+
+$ ->
+  pusher = new Pusher('8146487894a3cc81758c')
+  channel = pusher.subscribe('<%= Rails.env %>_main_channel')
+  channel.bind 'howl', (payload) ->
+    $('audio').get(0).play()
