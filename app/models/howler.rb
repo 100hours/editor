@@ -5,7 +5,7 @@ class Howler < ActiveRecord::Base
 
   validates_presence_of :url, :charges
   validates_uniqueness_of :url
-  validates_numericality_of :charges, greater_than_or_equal_to: 1
+  validates_numericality_of :charges, greater_than_or_equal_to: 1, if: :new_record?
 
   def played?
     !played_at.nil?
