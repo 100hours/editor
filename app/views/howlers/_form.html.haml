@@ -10,6 +10,10 @@
     .controls
       = f.number_field :charges, value: @howler.charges, class: "input"
   .control-group
+    = f.label :recipient_addresses, class: "control-label"
+    .controls
+      = f.text_field :recipient_addresses, value: @howler.recipient_addresses, class: "input", placeholder: "recipient1@example.com, recipient@example.com ..."
+  .control-group
     = f.label :notes, class: "control-label"
     .controls
       = f.text_area :notes, rows: 3
