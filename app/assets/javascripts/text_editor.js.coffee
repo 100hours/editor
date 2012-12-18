@@ -23,7 +23,7 @@ class Editor
     (@snapshot.body != @currentBody()) or (@snapshot.title != @currentTitle())
 
   countWords: (text) ->
-    $('#redactor').getText().match(/\w+/g).length;
+    $('#redactor').getText().match(/\w+/g)?.length;
 
   updateWordCount: ->
     $('#document_word_count').val(@countWords(@snapshot.body))
