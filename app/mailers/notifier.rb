@@ -5,4 +5,11 @@ class Notifier < ActionMailer::Base
          from: "no-reply@100hours.tv",
          subject: "[100hours.tv] David started writing for you")
   end
+
+  def new_howler(recipient, howler)
+    @howler = howler
+    mail(to: recipient,
+         from: "no-reply@100hours.tv",
+         subject: "[100hours.tv] You have been granted a 'howler'")
+  end
 end

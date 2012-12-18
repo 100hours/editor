@@ -26,3 +26,17 @@
   %p
     = simple_format @howler.notes
 
+%h3 Recipients
+%p
+  To add more recipients, 
+  = link_to "edit this howler", edit_howler_path(@howler)
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Email
+      %th Message sent?
+  %tbody
+    - @howler.recipient_list.each do |recipient, sent|
+      %tr
+        %td= recipient
+        %td= sent
