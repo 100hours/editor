@@ -53,7 +53,7 @@ class Editor
       success: (response) =>
         @updateConnectionStatus("Saved", "info")
         @dirty = false
-      error: (response) ->
+      error: (response) =>
         @updateConnectionStatus("Failed to save", "warning")
         @dirty = false
 
